@@ -1,0 +1,19 @@
+img {
+  width: 60%;
+  cursor: pointer;
+  border: 3px solid var(--font-color);
+  border-radius: 0.8rem;
+}
+
+img:hover {
+  border-color: var(--sec-font-color);
+}
+
+.wrap-content {
+  min-height: 670px;
+  background: linear-gradient(
+    to bottom,
+    rgba(100, 100, 100, 0.7),
+    rgba(0, 0, 0, 0)
+  );
+}

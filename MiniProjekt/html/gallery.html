@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/be74d355cc.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../css/template.css" />
+    <link rel="stylesheet" href="../css/gallery.css" />
+  </head>
+
+  <body>
+    <nav id="sidebar">
+      <div class="xmark">
+        <i id="close" class="x fa-solid fa-xmark font-size-l"></i>
+      </div>
+      <ul class="sites">
+        <li class="font font-bold font-size-m">
+          <a href="./index.html">Home</a>
+        </li>
+        <li class="font font-bold font-size-m">
+          <a href="./gallery.html">Gallery</a>
+        </li>
+        <li class="font font-bold font-size-m">
+          <a href="./contact.html">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <nav class="sticky">
+        <div class="wrap-menu">
+          <i id="slide" class="mobile-menu fa-solid fa-bars font-size-m"></i>
+          <ul class="sites">
+            <li class="font font-bold font-size-m">
+              <a href="./index.html">Home</a>
+            </li>
+            <li class="font font-bold font-size-m">
+              <a href="./gallery.html">Gallery</a>
+            </li>
+            <li class="font font-bold font-size-m">
+              <a href="./contact.html">Contact</a>
+            </li>
+          </ul>
+          <div id="clock" class="font font-bold font-size-m"></div>
+        </div>
+      </nav>
+      <main>
+        <section class="gallery-container">
+          <h1 class="font font-bold font-size-xxl stroked">Photo Gallery</h1>
+          <div class="gallery-grid">
+            <img src="../assets/IMG_1.jpg" alt="Madera" />
+            <img src="../assets/IMG_2.jpg" alt="Thailand" />
+            <img src="../assets/IMG_3.jpg" alt="Dominican Republic" />
+            <img src="../assets/IMG_4.jpg" alt="Egypt" />
+            <img src="../assets/IMG_5.jpg" alt="Kenya" />
+            <img src="../assets/IMG_6.jpg" alt="United Kingdom" />
+            <img src="../assets/IMG_7.jpg" alt="Hungary" />
+            <img src="../assets/IMG_8.jpg" alt="United Arab Emirates" />
+            <img src="../assets/IMG_9.jpg" alt="Poland" />
+          </div>
+        </section>
+        <section class="video-section">
+          <h2 class="font font-bold font-size-l">Video</h2>
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtu.be/dQw4w9WgXcQ?si=mW154zbxVy1HYO52"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </section>
+        <div id="lightbox" class="lightbox hidden">
+          <span class="close">&times;</span>
+          <img class="lightbox-img" src="" alt="" />
+          <button class="prev">&#10094;</button>
+          <button class="next">&#10095;</button>
+        </div>
+      </main>
+      <footer>
+        <div class="wrap-menu">
+          <p class="font font-bold">Jan Furtak</p>
+
+          <ul class="icons">
+            <li>
+              <a href="https://github.com/janfurtak"
+                ><i class="fa-brands fa-github font-size-m"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://x.com/Cla33ified"
+                ><i class="fa-brands fa-twitter font-size-m"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="../js/template.js"></script>
+  <script src="../js/gallery.js"></script>
+</html>

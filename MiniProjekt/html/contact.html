@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/be74d355cc.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../css/template.css" />
+    <link rel="stylesheet" href="../css/form.css" />
+  </head>
+
+  <body>
+    <nav id="sidebar">
+      <div class="xmark">
+        <i id="close" class="x fa-solid fa-xmark font-size-l"></i>
+      </div>
+      <ul class="sites">
+        <li class="font font-bold font-size-m">
+          <a href="./index.html">Home</a>
+        </li>
+        <li class="font font-bold font-size-m">
+          <a href="./gallery.html">Gallery</a>
+        </li>
+        <li class="font font-bold font-size-m">
+          <a href="./contact.html">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <nav class="sticky">
+        <div class="wrap-menu">
+          <i id="slide" class="mobile-menu fa-solid fa-bars font-size-m"></i>
+          <ul class="sites">
+            <li class="font font-bold font-size-m">
+              <a href="./index.html">Home</a>
+            </li>
+            <li class="font font-bold font-size-m">
+              <a href="./gallery.html">Gallery</a>
+            </li>
+            <li class="font font-bold font-size-m">
+              <a href="./contact.html">Contact</a>
+            </li>
+          </ul>
+          <div id="clock" class="font font-bold font-size-m"></div>
+        </div>
+      </nav>
+      <main>
+        <div class="wrap-content">
+          <div class="column">
+            <h1 class="font font-size-xxl font-xbold stroked">Contact me!</h1>
+            <h5 class="font font-size-l font-bold">
+              Type your e-mail and send me a message!
+            </h5>
+            <form id="form" action="">
+              <div class="input">
+                <label for="name" class="font font-bold font-size-s">
+                  Full Name:</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  minlength="3"
+                  placeholder="Full Name"
+                  required
+                />
+                <div class="form-error font font-bold"></div>
+              </div>
+              <div class="input">
+                <label for="email" class="font font-bold font-size-s"
+                  >E-mail:</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="mail@example.com"
+                  required
+                />
+                <div class="form-error font"></div>
+              </div>
+              <div class="input">
+                <label for="topic" class="font font-bold font-size-s"
+                  >Topic:</label
+                >
+                <select id="topic" name="topic">
+                  <option value="Computer Science">Compter Science</option>
+                  <option value="Gallery">Gallery</option>
+                  <option value="Video Games">Video Games</option>
+                  <option value="Other">Other...</option>
+                </select>
+              </div>
+              <div class="input">
+                <label for="message" class="font font-bold font-size-sd">
+                  Message:</label
+                >
+                <textarea
+                  name="message"
+                  id="message"
+                  rows="6"
+                  placeholder="Type your message here..."
+                  required
+                ></textarea>
+                <div class="form-error font font-bold"></div>
+              </div>
+              <div class="wrap-buttons">
+                <button
+                  id="clear"
+                  type="button"
+                  class="font font-bold font-size-s"
+                >
+                  Clear
+                </button>
+                <button
+                  id="submit"
+                  type="submit"
+                  class="font font-bold font-size-s"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <div class="wrap-menu">
+          <p class="font font-bold">Jan Furtak</p>
+
+          <ul class="icons">
+            <li>
+              <a href="https://github.com/janfurtak"
+                ><i class="fa-brands fa-github font-size-m"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://x.com/Cla33ified"
+                ><i class="fa-brands fa-twitter font-size-m"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="../js/template.js"></script>
+  <script src="../js/form.js"></script>
+</html>
