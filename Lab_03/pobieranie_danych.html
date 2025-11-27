@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Ćwiczenie 3</title>
+    <style>
+      .product-grid {
+        align-self: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: minmax(500px, auto);
+        gap: 2em;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        padding: 2em;
+        box-shadow: 2px 3px 5px black;
+        border-radius: 10px;
+      }
+
+      img {
+        justify-self: center;
+        align-self: center;
+      }
+
+      .sort {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h1 class="font2">Produkty</h1>
+      <div class="sort">
+        <div>
+          <input
+            id="search"
+            type="search"
+            name="search"
+            placeholder="Wyszukaj produkt"
+          />
+        </div>
+        <div>
+          <label for="sort" class="font2">Sortuj</label>
+          <select name="sort" id="sort">
+            <option value="def" selected>Brak</option>
+            <option value="asc">Rosnąco</option>
+            <option value="desc">Malejąco</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-grid"></div>
+    </div>
+    <script>
+      const parent = document.querySelector(".product-grid");
+
+      let original = null;
+      let filtered_state = null;
+      let sorted_state = null;
+
+      const render = (state) => {
+        clearCards();
+        state.forEach((product) => {
+          const card = `
+                        <img src="${product.thumbnail}" alt="product">
+                        <div class="desc">
+                            <h2>${product.title}</h2>
+                            <p>${product.description}</p>
+                         </div>
+                    `;
+          const card_el = document.createElement("div");
+          card_el.innerHTML = card;
+          card_el.className = "card";
+          parent.appendChild(card_el);
+        });
+      };
+
+      fetch("https://dummyjson.com/products")
+        .then((res) => res.json())
+        .then((data) => {
+          const def = data.products;
+          original = def;
+          filtered_state = def;
+          sorted_state = def;
+          render(sorted_state);
+        });
+
+      const sortAsc = (arr) => {
+        return [...arr].sort((a, b) => {
+          return a.title.localeCompare(b.title);
+        });
+      };
+
+      const sortDesc = (arr) => {
+        return [...arr].sort((a, b) => {
+          return b.title.localeCompare(a.title);
+        });
+      };
+
+      const restoreDef = () => {
+        return [...filtered_state];
+      };
+
+      const sort = (arr, type) => {
+        if (type === "desc") return sortDesc(arr);
+        else if (type === "asc") return sortAsc(arr);
+        else return restoreDef();
+      };
+
+      const clearCards = () => {
+        parent.innerHTML = "";
+      };
+
+      document.querySelector("select").addEventListener("change", (e) => {
+        sorted_state = sort(filtered_state, e.target.value);
+        clearCards();
+        render(sorted_state);
+      });
+
+      const match = (phrases, target) => {
+        const words = Array.isArray(phrases) ? phrases : [phrases];
+        return words.every((word) =>
+          target.some((el) => el.toLowerCase().includes(word.toLowerCase()))
+        );
+      };
+
+      document.getElementById("search").addEventListener("input", (e) => {
+        const inputValue = e.target.value.trim();
+
+        if (!inputValue) {
+          filtered_state = [...original];
+          const sort_type = document.querySelector("select").value;
+          sorted_state = sort(filtered_state, sort_type);
+          clearCards();
+          render(sorted_state);
+          return;
+        }
+
+        const cards = [...original];
+
+        filtered_state = cards.filter((card) => {
+          const title = card.title.split(" ");
+          const desc = card.description.split(" ");
+          const keywords = inputValue.split(" ").filter((k) => k);
+          return match(keywords, title) || match(keywords, desc);
+        });
+
+        const sort_type = document.querySelector("select").value;
+        sorted_state = sort(filtered_state, sort_type);
+
+        clearCards();
+        render(sorted_state);
+      });
+    </script>
+  </body>
+</html>

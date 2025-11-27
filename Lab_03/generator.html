@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Ćwiczenie 2</title>
+    <style>
+      body {
+        height: 100vh;
+      }
+
+      .column {
+        justify-content: space-evenly;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="column">
+        <h1>Generator haseł</h1>
+        <form>
+          <label for="min_length">Minimalna długość hasła</label>
+          <input type="number" name="min_length" id="min_length" />
+          <label for="max_length">Maksymalna długość hasła</label>
+          <input type="number" name="max_length" id="max_length" />
+          <div>
+            <label for="capitalize">Wielkie litery?</label>
+            <input type="checkbox" name="capitalize" id="capitalize" />
+          </div>
+          <div>
+            <label for="special">Znaki specjalne</label>
+            <input type="checkbox" name="special" id="special" />
+          </div>
+          <button type="button" id="generate">Wygeneruj hasło</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      const generate = document.getElementById("generate");
+      const characters = "abcdefghijklmnopqrstuvwxyz";
+      const capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const special_chars = `!"#$%&'()*+,-./:;<=>?@[\]^_\\\`{|}~`;
+
+      generate.addEventListener("click", () => {
+        const min_len = parseInt(document.getElementById("min_length").value);
+        const max_len = parseInt(document.getElementById("max_length").value);
+        const capitalize = document.getElementById("capitalize").checked;
+        const special = document.getElementById("special").checked;
+
+        if (isNaN(min_len) || isNaN(max_len) || min_len > max_len) {
+          alert("Podaj poprawne wartości");
+          return;
+        }
+
+        const password_length =
+          Math.floor(Math.random() * (max_len - min_len + 1)) + min_len;
+        let password_characters = characters;
+        if (capitalize)
+          password_characters = password_characters.concat(capital_chars);
+        if (special)
+          password_characters = password_characters.concat(special_chars);
+
+        let password = "";
+        for (let i = 0; i < password_length; i++) {
+          password +=
+            password_characters[
+              Math.floor(Math.random() * password_characters.length)
+            ];
+        }
+        console.log(password);
+
+        alert(`Wygenerowane hasło: ${password}`);
+      });
+    </script>
+  </body>
+</html>

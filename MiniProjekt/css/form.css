@@ -73,7 +73,6 @@ form button::before {
   transition: transform 0.5s;
   z-index: -1;
   transform: translateX(-100%);
-  transform-origin: center;
 }
 
 form button[type="button"]::before {

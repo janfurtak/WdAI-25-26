@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Ćwiczenie 1</title>
+    <style>
+      body {
+        height: 100vh;
+      }
+
+      .stopwatch {
+        font-size: 2em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="column">
+        <h1>Stoper</h1>
+        <div class="stopwatch"></div>
+        <div class="buttons">
+          <button class="start">START</button>
+          <button class="stop">STOP</button>
+          <button class="reset">RESET</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let seconds = 0;
+      let minutes = 0;
+      let hours = 0;
+
+      const start_button = document.querySelector(".start");
+      const stop_button = document.querySelector(".stop");
+      const reset_button = document.querySelector(".reset");
+
+      let stopwatch_element = document.querySelector(".stopwatch");
+      stopwatch_element.innerHTML = `${seconds}s`;
+      stopwatch = null;
+
+      const start = () => {
+        if (stopwatch) return;
+        stopwatch = setInterval(() => {
+          seconds += 1;
+          stopwatch_element.innerHTML = `${seconds}s`;
+          if (minutes > 0)
+            stopwatch_element.innerHTML = `${minutes}min ${seconds}s`;
+          if (hours > 0)
+            stopwatch_element.innerHTML = `${hours}h ${minutes}min ${seconds}s`;
+
+          if (seconds >= 60) {
+            minutes += 1;
+            seconds = 0;
+            stopwatch_element.innerHTML = `${minutes}min ${seconds}s`;
+          }
+
+          if (minutes >= 60) {
+            hours += 1;
+            minutes = 0;
+            seconds = 0;
+            stopwatch_element.innerHTML = `${hours}h ${minutes}min ${seconds}s`;
+          }
+        }, 1000);
+      };
+
+      const stop = () => {
+        if (stopwatch) {
+          clearInterval(stopwatch);
+          stopwatch = null;
+          stopwatch_element.innerHTML = `${seconds}s`;
+          if (minutes > 0)
+            stopwatch_element.innerHTML = `${minutes}min ${seconds}s`;
+          if (hours > 0)
+            stopwatch_element.innerHTML = `${hours}h ${minutes}min ${seconds}s`;
+        }
+      };
+
+      const reset = () => {
+        if (stopwatch) clearInterval(stopwatch);
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        stopwatch = null;
+        stopwatch_element.innerHTML = `${seconds}s`;
+      };
+
+      start_button.addEventListener("click", start);
+      stop_button.addEventListener("click", stop);
+      reset_button.addEventListener("click", reset);
+    </script>
+  </body>
+</html>
