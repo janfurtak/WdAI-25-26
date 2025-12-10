@@ -1,0 +1,201 @@
+{
+  "info": {
+    "_postman_id": "b3c7d30c-2eac-46e8-83ef-9a7993c3b1f0",
+    "name": "Bookstore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users Service",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3003/api/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3003",
+              "path": ["api", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"123456\"\n}",
+              "options": {
+                "raw": { "language": "json" }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login (get JWT)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3003/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3003",
+              "path": ["api", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"123456\"\n}",
+              "options": {
+                "raw": { "language": "json" }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.token) {",
+                  "   pm.collectionVariables.set('JWT_TOKEN', json.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Books Service",
+      "item": [
+        {
+          "name": "Get all books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3001/api/books"
+          }
+        },
+        {
+          "name": "Get book by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3001/api/books/{{BOOK_ID}}"
+          }
+        },
+        {
+          "name": "Create book",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3001/api/books",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Example Book\",\n  \"author\": \"Author Name\",\n  \"year\": 2024,\n  \"price\": 49.99\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update book",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3001/api/books/{{BOOK_ID}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 29.99\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete book",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3001/api/books/{{BOOK_ID}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders Service",
+      "item": [
+        {
+          "name": "Get all orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3002/api/orders"
+          }
+        },
+        {
+          "name": "Get order by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3002/api/orders/{{ORDER_ID}}"
+          }
+        },
+        {
+          "name": "Create order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3002/api/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookId\": \"{{BOOK_ID}}\",\n  \"quantity\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update order",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3002/api/orders/{{ORDER_ID}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 3\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete order",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{JWT_TOKEN}}" }
+            ],
+            "url": "http://localhost:3002/api/orders/{{ORDER_ID}}"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "JWT_TOKEN", "value": "" },
+    { "key": "BOOK_ID", "value": "" },
+    { "key": "ORDER_ID", "value": "" }
+  ]
+}

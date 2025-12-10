@@ -7,7 +7,7 @@ class Game {
     this.ctx = context;
 
     this.score = 0;
-    this.highScores = JSON.parse(localStorage.getItem("highscores1")) || [];
+    this.highScores = JSON.parse(localStorage.getItem("highscores2")) || [];
 
     this.map = new Map(this.ctx, this.canvas);
 
